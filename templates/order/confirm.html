@@ -1,0 +1,431 @@
+{% extends "order/layout.html" %}
+{% block title %}
+    {{ super() }}
+{% endblock %}
+{% block head_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_css %}
+    {{ super() }}
+    <style type="text/css">
+        #arrow i:after {
+            font-family: iconfont!important;
+            font-size: 32px;
+            line-height: 44px;
+            font-style: normal;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-stroke-width: .2px;
+            display: block;
+            color: rgba(0,0,0,.5);
+            color: #c7c7c7;
+            content: ">";
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            margin-top: -18px;
+            margin-right: -5px;
+            cursor: pointer;
+            padding: 0px 10px;
+        }
+        #arrow:hover i:after {
+            color: #18b4ed;
+        }
+        .ui-list-link > li:after {
+            content: "";
+        }
+        .dialog-address .ui-dialog-cnt {
+            width: 90%;
+        }
+        .dialog-address .ui-dialog-bd {
+            padding: 3px;
+        }
+        .dialog-address .ui-icon-add {
+            display: inline-block;
+            line-height: 1em;
+        }
+        .dialog-address .ui-icon-add:before {
+            font-size: 0.69em;
+        }
+        .dialog-address .ui-border-t > .ui-radio {
+            line-height: 43px;
+        }
+        .dialog-address .ui-list-function.ui-list-link .ui-list-info {
+            padding-right: 1.5em;
+        }
+        .dialog-address .dialog-title {
+            margin-left: 1em;
+            padding-top: 6px;
+        }
+        .ui-notice{
+            height: 7%;
+        }
+        .ui-notice p{
+            color: #1fbaf3;
+        }
+    </style>
+{% endblock %}
+{% block head_after_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_src %}
+    {{ super() }}
+{% endblock %}
+{% block head_js %}
+    {{ super() }}
+    <script type="text/javascript">
+        {% if address %}
+        GLOBAL.address_id = {{ address.id }};
+        {% endif %}
+    </script>
+{% endblock %}
+{% block body_header %}
+    {{ super() }}
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="go_back();"></i><h1>确认订单</h1>
+    </header>
+{% endblock %}
+{% block body_main %}
+<div class="ui-dialog dialog-address">
+    <div class="ui-dialog-cnt">
+        <div class="ui-dialog-bd">
+            <div>
+                <h4 class="dialog-title">选择收货地址</h4>
+                <div>
+                    <ul class="ui-list ui-list-function ui-list-link ui-border-tb">
+                        {% for address in address_list %}
+                        <li class="ui-border-t">
+                            <span><i class="ui-icon-pin"></i></span>
+                            <div class="ui-list-info">
+                                <h4 class="ui-nowrap">{{ address.name }} ({{ address.phone }})</h4>
+                                <p class="ui-nowrap">
+                                    <strong>{{ address.apartment.campus.name }}</strong>
+                                    {{ address.apartment.name }}
+                                </p>
+                            </div>
+                            <label class="ui-radio" for="radio">
+                                <input data-address-id="{{ address.id }}" data-name="{{ address.name }}" data-phone="{{ address.phone }}" data-campus="{{ address.apartment.campus.name }}" data-apartment="{{ address.apartment.name }}" type="radio" name="radio-address" />
+                            </label>
+                        </li>
+                        {% endfor %}
+                        <li class="ui-border-t">
+                            <div class="ui-list-info">
+                                <button type="button" data-role="button" class="select" id="dialogButtonAdd">
+                                    <i class="ui-icon-add"></i>添加新地址
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="ui-dialog-ft">
+            <button type="button" data-role="button" class="select" id="dialogButtonCancel">取消</button>
+            <button type="button" data-role="button" class="select" id="dialogButtonOK">确定</button>
+        </div>
+    </div>        
+</div>
+<section class="ui-container with-bottom-nav">
+    <ul class="ui-list ui-list-link ui-border-radius" id="change-address">
+        <li class="ui-border-t">
+            <div class="ui-list-img" style="width:20%">
+                <i class="ui-icon-pin" style="font-size:400%"></i>
+            </div>
+            <div class="ui-list-info" id="address-info-line">
+            {% if address %}
+                <h1 class="ui-nowrap">{{ address.name }} ({{ address.phone }})</h1>
+                <p class="ui-nowrap">
+                    <strong>{{ address.apartment.campus.name }}</strong>
+                    {{ address.apartment.name }}
+                </p>
+            {% else %}
+                <h4 class="ui-nowrap"><small>{{ user_name }}</small></h4>
+                <p class="ui-nowrap">尚未填写收货地址</p>
+            {% endif %}
+            </div>
+            <span id="arrow"><i></i><span>
+        </li>
+    </ul>
+    {% if item_list %}
+    <div class="panel panel-default" style="padding:10px">
+        <ul class="ui-list">
+            {% for item in item_list %}
+            <li>
+                <div class="ui-avatar">
+                    <span style="background-image:url({{ url_for('good.good_image', image_path=item.fruit.pic_url_1) }})"></span>
+                </div>
+                <div class="ui-list-info ui-border-t">
+                    <ul class="ui-row">
+                        <li class="ui-col ui-col-75">
+                            <h4 class="ui-nowrap">{{ item.fruit.name }}</h4>
+                            <p class="ui-nowrap">
+                                {% if item.size==0 %}
+                                    中份
+                                {% elif item.size==1 %}
+                                    大份
+                                {% elif item.size==2 %}
+                                    超大份
+                                {% endif %}
+                            </p>
+                            <div class="ui-flex ui-flex-pack-start">
+                                <div><p>单价￥</p></div>
+                                <div class="ui-nowrap">
+                                    <p id="data-price" class="ui-nowrap">
+                                    {% if item.size==0 %}
+                                        {{ item.fruit.price_small }}
+                                    {% elif item.size==1 %}
+                                        {{ item.fruit.price_middle }}
+                                    {% elif item.size==2 %}
+                                        {{ item.fruit.price_big }}
+                                    {% else %}
+                                        {{ item.fruit.price_sell }}
+                                    {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ui-col ui-col-25">
+                            <h4 class="ui-nowrap" style="color:grey">X{{ item.amount }}</h4>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {% endfor %}
+            <ul class="ui-list ui-list-text">
+                <li class="ui-border-t">
+                    <div class="ui-list-info">
+                        <h4>运费</h4>
+                    </div>
+                    <div class="ui-list-action">
+                        <h4>￥0.50</h4>
+                    </div>
+                </li>
+                <li class="ui-border-t">
+                    <div class="ui-list-info">
+                        <h4>小计</h4>
+                    </div>
+                    <div class="ui-list-action">
+                        <h4>￥{{order.total}}</h4>
+                    </div>
+                </li>                
+            </ul>
+        </ul>
+    </div>
+    {% endif %}
+    {% if item_plus_list %}
+    <div class="panel panel-default" style="padding:10px">
+        <ul class="ui-list">
+            {% for item in item_plus_list %}
+            <li>
+                <div class="ui-avatar">
+                    <span style="background-image:url({{ url_for('good.good_image', image_path=item.fruit.pic_url_1) }})"></span>
+                </div>
+                <div class="ui-list-info ui-border-tb">
+                    <ul class="ui-row">
+                        <li class="ui-col ui-col-75">
+                            <h4 class="ui-nowrap">{{ item.fruit.name }}</h4>
+                            <p class="ui-nowrap">
+                                {% if item.size==0 %}
+                                    小份
+                                {% elif item.size==1 %}
+                                    中份
+                                {% elif item.size==2 %}
+                                    大份
+                                {% endif %}
+                            </p>
+                            <div class="ui-flex ui-flex-pack-start">
+                                <div><p>单价￥</p></div>
+                                <div class="ui-nowrap">
+                                    <p id="data-price" class="ui-nowrap">
+                                    {% if item.size==0 %}
+                                        {{ item.fruit.price_small }}
+                                    {% elif item.size==1 %}
+                                        {{ item.fruit.price_middle }}
+                                    {% elif item.size==2 %}
+                                        {{ item.fruit.price_big }}
+                                    {% else %}
+                                        {{ item.fruit.price_sell }}
+                                    {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="ui-col ui-col-25">
+                            <h4 class="ui-nowrap" style="color:grey">X{{ item.amount }}</h4>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            {% endfor %}
+            <ul class="ui-list ui-list-text">
+                <li class="ui-border-t">
+                    <div class="ui-list-info">
+                        <h4>送达时间</h4>
+                    </div>
+                    <div class="ui-list-action">
+                        <h4>
+                        今天{{order_plus.time_arrive}}：00
+                        </h4>
+                    </div>
+                </li>
+                <li class="ui-border-t">
+                    <div class="ui-list-info">
+                        <h4>运费</h4>
+                    </div>
+                    <div class="ui-list-action">
+                        <h4>￥2.00</h4>
+                    </div>
+                </li>
+                <li class="ui-border-t">
+                    <div class="ui-list-info">
+                        <h4>小计</h4>
+                    </div>
+                    <div class="ui-list-action">
+                        <h4>￥{{order_plus.total}}</h4>
+                    </div>
+                </li>                
+            </ul>
+        </ul>
+    </div>
+    {% endif %}
+
+    <br/>
+
+    <div class="ui-form">
+        <form action="#">
+            <div class="ui-form-item ui-form-item-radio ui-border-tb">
+                <label class="ui-radio" for="radio">
+                    <input type="radio" checked="checked" name="radio">
+                </label>
+                <p>微信支付</p>
+            </div>
+            {#
+            <div class="ui-form-item ui-form-item-radio ">
+                <label class="ui-radio" for="radio">
+                    <input type="radio" name="radio">
+                </label>
+                <p>支付宝</p>                    
+            </div>
+            #}
+        </form>
+    </div>
+
+    <div class="ui-notice">
+        <p>请在10分钟内完成支付哦</p>
+    </div>
+</section>
+{% endblock %}
+{% block body_footer %}
+    <footer class="ui-footer ui-footer-btn">
+        <ul class="ui-tiled ui-border-t" style = "background-color:#FFC125; color: #FFF;">
+            <li id="btn-pay" data-url="{{ url_for('pay.pay_weixin', order_id=order.id) }}">
+                <div class="text-center">
+                    <a href="javascript:;">去付款</a>
+                </div>
+            </li>
+        </ul>
+    </footer>
+
+{% endblock %}
+{% block body_src %}
+    {{ super() }}
+{% endblock %}
+{% block body_js %}
+    {{ super() }}
+    <script type="text/javascript">
+        $(function() {
+            $('#change-address').click(function() {
+                $(".dialog-address").dialog("show");
+            });
+            $(".dialog-address").on("dialog:hide",function(e){
+                if($(".dialog-address").attr('data-not-hide')) {
+                    setTimeout(function() {
+                        $(".dialog-address").dialog("show");
+                    }, 100);
+                }
+            });
+            $('#dialogButtonAdd').on('tap click', function() {
+                location.href = "{{ url_for('user.address_edit_view', _suffix='', next=request.url) }}";
+            });
+            $('#dialogButtonCancel').click(function() {
+                $(".dialog-address").removeAttr('data-not-hide');
+                $(".dialog-address").dialog("hide");
+            });
+            $('#dialogButtonOK').on('tap', function(event) {
+                event.preventDefault();
+                var $chk = $('.dialog-address').find('input[type="radio"]').filter(':checked');
+                if($chk.length > 0) {
+                    $(".dialog-address").removeAttr('data-not-hide');
+                    $(".dialog-address").dialog("hide");
+                    var $info = $('#address-info-line');
+                    $info.find('h4.ui-nowrap').html([
+                        $chk.attr('data-name'),
+                        ' (', $chk.attr('data-phone'), ')'
+                    ].join(''));
+                    $info.find('p.ui-nowrap').html([
+                        '<strong>', $chk.attr('data-campus'), '</strong>',
+                        $chk.attr('data-apartment')
+                    ].join(''));
+                    var address_id = $chk.attr('data-address-id');
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ url_for('order.order_update_address') }}",
+                        data: {
+                            id: {{ order.id }},
+                            address: address_id
+                        },
+                        dataType: 'json',
+                        timeout: 15000,
+                        success: function(data){
+                            if(data.error == 0) {
+                                GLOBAL.address_id = address_id;
+                                $.tips({
+                                    content: '收货地址已更新',
+                                    stayTime: 1000,
+                                    type: "success"
+                                });
+                            }
+                            else {
+                                $.dialog({
+                                    title: '提示',
+                                    content: data.desc,
+                                    button: ["确认"]
+                                });
+                            }
+                        },
+                        error: function(xhr, type){
+                            console.log(xhr, type)
+                            // alert('服务器错误')
+                        }
+                    });
+                }
+                else {
+                    $(".dialog-address").attr('data-not-hide', 'true');
+                }
+            });
+            if(GLOBAL.address_id) {
+                var $current = $(".dialog-address").find('input[data-address-id="' + GLOBAL.address_id + '"]');
+                console.log($current)
+                $current.prop('checked', true);
+            }
+            $('#btn-pay').click(function() {
+                var addr_id = parseInt((GLOBAL.address_id));
+                if(!isNaN(addr_id)) {
+                    var target_url = $(this).attr('data-url');
+                    if(target_url.indexOf('?') >= 0) {
+                        target_url += '&';
+                    }
+                    else {
+                        target_url += '?';
+                    }
+                    location.href = target_url + 'address=' + addr_id.toString();
+                }
+                else {
+                    alert('请先填写收货地址');
+                }
+            })
+        });
+    </script>
+{% endblock %}
+{% block body_after_src %}
+    {{ super() }}
+{% endblock %}

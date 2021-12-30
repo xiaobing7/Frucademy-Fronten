@@ -1,0 +1,95 @@
+<aside class="main-sidebar hidden-print">
+    <section class="sidebar">
+        <!-- Sidebar Menu-->
+        <ul class="sidebar-menu">
+            <li data-bar="{{ url_for('admin.index_view', _suffix='') }}">
+                <a href="javascript:;"><i class="fa fa-dashboard"></i><span>概览</span></a>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-shopping-basket"></i><span>订单管理</span><i class="fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li data-bar="{{ url_for('admin.order_list_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-list"></i> 订单列表</a>
+                    </li>
+                    <li data-bar="{{ url_for('admin.order_statistics_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-bar-chart"></i> 水果统计</a>
+                    </li>
+                    {# <li><a href="#" target="_blank"><i class="fa fa-circle-o"></i> #</a></li> #}
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-cubes"></i><span>商品管理</span><i class="fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li data-bar="{{ url_for('admin.good_category_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-bars"></i> 商品分类</a>
+                    </li>
+                    <li data-bar="{{ url_for('admin.good_list_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-list"></i> 商品列表</a>
+                    </li>
+                    <li data-bar="{{ url_for('admin.good_statistics_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-bar-chart"></i> 销量统计</a>
+                    </li>
+                    {# <li><a href="#" target="_blank"><i class="fa fa-circle-o"></i> #</a></li> #}
+                </ul>
+            </li>
+            <!--
+            <li class="treeview">
+                <a href="#"><i class="fa fa-edit"></i><span>地址管理</span><i class="fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li data-bar="{{ url_for('admin.address_campus_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-university"></i> 校区</a>
+                    </li>
+                    <li data-bar="{{ url_for('admin.address_apartment_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-building-o"></i> 楼栋</a>
+                    </li>
+                </ul>
+            </li>
+            -->
+            {#
+            <li class="treeview">
+                <a href="#"><i class="fa fa-users"></i><span>商户管理</span><i class="fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li data-bar="{{ url_for('admin.merchant_list_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-list"></i> 商户列表</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-graduation-cap"></i><span>积分管理</span><i class="fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li data-bar="{{ url_for('admin.point_defined_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-circle-o"></i> 等级定义</a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-circle-o"></i><span> 积分商城</span><i class="fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li data-bar="{{ url_for('admin.point_mall_list_view', _suffix='') }}">
+                                <a href="javascript:;"><i class="fa fa-list"></i> 商品列表</a>
+                            </li>
+                            <li data-bar="{{ url_for('admin.point_mall_statistics_view', _suffix='') }}">
+                                <a href="javascript:;"><i class="fa fa-bar-chart"></i><span> 销量统计</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            #}
+            <!--
+            <li class="treeview">
+                <a href="#"><i class="fa fa-scissors"></i><span>快捷功能</span><i class="fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li data-bar="{{ url_for('admin.shortcut_print_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-print"></i> 订单打印</a>
+                    </li>
+                    <li data-bar="{{ url_for('admin.shortcut_sms_view', _suffix='') }}">
+                        <a href="javascript:;"><i class="fa fa-envelope-open-o"></i> 短信发送</a>
+                    </li>
+                </ul>
+            </li>
+            -->
+            <li data-bar="{{ url_for('admin.suggestion_view', _suffix='') }}">
+                <a href="javascript:;"><i class="fa fa-volume-up"></i><span>反馈建议</span></a>
+            </li>
+        </ul>
+    </section>
+</aside>

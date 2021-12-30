@@ -1,0 +1,85 @@
+{% extends "user/layout.html" %}
+{% block title %}
+    {{ super() }}
+{% endblock %}
+{% block head_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_css %}
+    {{ super() }}
+{% endblock %}
+{% block head_after_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_src %}
+    {{ super() }}
+{% endblock %}
+{% block head_js %}
+    {{ super() }}
+{% endblock %}
+{% block body_header %}
+    {{ super() }}
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="go_back();"></i>
+        <h1>
+            {% if order_status == -1 %}
+                未付款订单
+            {% elif order_status == 0 %}
+                待收货订单
+            {% elif order_status == 1 %}
+                已完成订单
+            {% else %}
+                历史订单
+            {% endif %}
+        </h1>
+    </header>
+{% endblock %}
+{% block body_main %}
+    {{ super() }}
+    <section class="ui-container with-bottom-nav">
+        {% if order_list %}
+        <ul class="ui-list ui-list-test ui-list-active ui-border-tb with-top-nav">
+            {% for order in order_list %}
+                <li class="ui-border-t" onclick="location=
+                    {% if order.status==-1 %}
+                        '{{url_for('order.re_confirm_view', _suffix='', order_id=order.id)}}'
+                    {% else %}
+                        '{{url_for('order.order_detail', _suffix='', order_id=order.id)}}'
+                    {% endif %}
+                ">
+                    <div class="ui-list-info">
+                        <h1 class="ui-nowrap">
+                            {% if order.status == -2 %}
+                                已过期
+                            {% elif order.status == -1 %}
+                                未付款
+                            {% elif order.status == 0 %}
+                                待收货
+                            {% elif order.status == 1 %}
+                                已完成
+                            {% endif %}
+                            ￥{{ order.total }}
+                        </h1>
+                        <p class="ui-nowrap">{{ order.date }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="ui-whitespace">
+            <p class="ui-txt-muted" style="padding-top: 1em;">啊哦，您还没有订单记录哟</p>
+        </div>
+        {% endif %}
+    </section>
+{% endblock %}
+{% block body_footer %}
+{% endblock %}
+{% block body_src %}
+    {{ super() }}
+{% endblock %}
+{% block body_js %}
+    {{ super() }}
+{% endblock %}
+{% block body_after_src %}
+    {{ super() }}
+{% endblock %}

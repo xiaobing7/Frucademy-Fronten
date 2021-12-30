@@ -1,0 +1,113 @@
+{% extends "base-layout.html" %}
+{% block title %}
+    {{ super() }}
+{% endblock %}
+{% block head_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_css %}
+    {{ super() }}
+    <style type="text/css">
+        .ui-txt-justify {
+            text-indent: 2em;
+        }
+    </style>
+{% endblock %}
+{% block head_after_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_src %}
+    {{ super() }}
+{% endblock %}
+{% block head_js %}
+    {{ super() }}
+{% endblock %}
+{% block body_header %}
+    {{ super() }}
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="go_back();"></i><h1>关于</h1>
+    </header>
+{% endblock %}
+{% block body_main %}
+    {{ super() }}
+    <div style="margin-top: 49px;">
+        <div class="ui-whitespace" style="padding-bottom: 65px;">
+            <h1 class="ui-flex ui-flex-pack-center">
+                <span style="margin-left: -8em;">深秋里的一颗糖</span>
+            </h1>
+            <h4 class="ui-flex ui-flex-pack-end ui-txt-info">
+                <span style="margin-right: 8em;">用最好的水果满足你的味蕾</span>
+            </h4>
+            <div>
+                <p class="ui-txt-justify">
+                    我总觉得水果是上帝给予吃货们的特别的礼物。
+                </p>
+                <p class="ui-txt-justify">
+                    无论是嗜甜或喜酸的人都能在这千百种水果中选择到适合你的那一种味道。
+                </p>
+                <p class="ui-txt-justify">
+                    秋意浓，甘甜清爽、口感温润、汁水满溢的“糖衣炸弹”，一定会为你洗去秋天的干燥。每天要喝八杯水，每天要吃一个苹果，才会有棒棒的身体。在这个打着新鲜水果入食的招牌，实则加入各种人造色素和添加剂套路乱飞的时代，剥开套路的外衣，我们有的只有满满的真诚。水果的营养价值高、各种滋味好，每一口都是甜甜的果汁在嘴里迸发。听说好看的人都在吃水果，十一月里我们为你精心挑选了这些糖，不妨猜猜其中有没有属于你的那颗糖？
+                </p>
+                <p class="ui-txt-justify">
+                    红色是百看不厌的好看颜色。穿着红色外衣的石榴也很是争气。不要再眼巴巴地看着雅诗兰黛的红石榴精华啦！把石榴用净水冲过，把一颗颗好看的宝石摆放碗里，用小勺挖着吃，放进嘴里一口咬下，浓郁的汁水就会“biu”地在你舌尖上蔓延开来。
+                </p>
+                <p class="ui-txt-justify">
+                    前些日子我开玩笑说柚子在秋冬水果届的地位，就像马东在主持人里的地位——几乎没有人会排斥它！以一言概之：好吃的柚子一定带有一丝丝酸酸的味道。就是这酸味会让柚子的清甜更让你回味无穷，食欲大开。
+                </p>
+                <p class="ui-txt-justify">
+                    嗜甜是人的天性。我说这穿着黄色外衣的梨像是走在秋风里最甜的女孩子。好的水果直接吃或是稍加烹饪都是顶好吃的天然甜品。秋燥尝上一碗冰糖炖雪梨便能消下心头的烦闷。
+                </p>
+                <p class="ui-txt-justify">
+                    马蹄竹蔗水是很多餐厅里的秋令时节里被翻牌最多的养生饮品。马蹄，学名荸荠。性味甘寒，功效清热化痰、生津开胃、明目清音、消食醒酒。用开水煮过，剥去粗糙的黑色外衣，内里是如羊脂白玉般细腻的脆嫩果肉，和竹蔗同煮，其中滋味真是妙也。
+                </p>
+                <p class="ui-txt-justify">
+                    且不论水果入口时的美妙滋味，只是在忙碌的时刻，望着灯光敞亮下放置的琳琅满目、色彩饱和度极高的各色水果就能让你晓得生活的五光十色。
+                </p>
+                <p class="ui-txt-justify">
+                    好吃的水果有那么那么多，种种不胜枚举。我猜这里面一定会有你喜欢的那份甜。斗转星移，四时交替。不止是秋天，我们想用最好的水果轻拂你的舌尖，给你送去你最喜欢的那颗糖。
+                </p>
+            </div>
+
+<ul class="ui-list ui-border-tb">
+    <li class="ui-border-t">
+        <div class="ui-list-info">
+            <h4>Q1：我们是谁？</h4>
+            <p>骄傲地说出我们的名字：鲜果学院。我们还有一个洋气的英文名字：Frucademy。我们争做当代忙碌大学生的水果管家。</p>
+        </div>
+    </li>
+    <li class="ui-border-t">
+        <div class="ui-list-info">
+            <h4>Q2：水果店那么多，为什么我们是你最好的选择？</h4>
+            <div class="ui-txt-info">
+                <strong>质量上</strong>：我们有精挑细选之后选择出的优质的水果供应商。我们将在网上把水果的“出生证”——产地、品种等一一公开、透明地发布在网上。
+            </div>
+            <div class="ui-txt-info">
+                <strong>价格上</strong>：我们比同类水果店便宜20%。送货上门的运费只要0.5元，四舍五入就是不要钱！与同行业价格相比，我们占有最大的优势。
+            </div>
+            <div class="ui-txt-info">
+                <strong>服务上</strong>：我们提供配送到宿舍楼下，把最新鲜的水果第一时间送货到家。提供洗切水果装盘服务。
+            </div>
+            <div class="ui-txt-info">
+                <strong>种类上</strong>：我们提供多种蔬果色拉，果切拼盘。后续好吃的产品也将陆续推出。
+            </div>
+            <div class="ui-txt-info">
+                <strong>用心上</strong>：我们的推文将每月推出当下时令水果推荐，好吃的水果搭配，以及简单可口的水果料理食谱，敬请期待。
+            </div>
+        </div>
+    </li>
+</ul>
+    </div>
+    </div>
+{% endblock %}
+{% block body_footer %}
+    {{ super() }}
+{% endblock %}
+{% block body_src %}
+    {{ super() }}
+{% endblock %}
+{% block body_js %}
+    {{ super() }}
+{% endblock %}
+{% block body_after_src %}
+    {{ super() }}
+{% endblock %}

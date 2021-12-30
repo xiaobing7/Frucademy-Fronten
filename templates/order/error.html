@@ -1,0 +1,59 @@
+{% extends "order/layout.html" %}
+{% block title %}
+    {{ super() }}
+{% endblock %}
+{% block head_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_css %}
+    {{ super() }}
+{% endblock %}
+{% block head_after_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_src %}
+    {{ super() }}
+{% endblock %}
+{% block head_js %}
+    {{ super() }}
+    <script language="javascript" type="text/javascript"> 
+		var i = 2; 
+		var intervalid; 
+		intervalid = setInterval("fun()", 1000); 
+		function fun() { 
+			if (i == 0) { 
+				window.location.href = "{{action}}"; 
+				clearInterval(intervalid); 
+			} 
+			document.getElementById("mes").innerHTML = i; 
+			i--; 
+		} 
+	</script>
+{% endblock %}
+{% block body_header %}
+    {{ super() }}
+    <header class="ui-header ui-header-positive ui-border-b">
+        <h1>啊哦~</h1>
+    </header>
+{% endblock %}
+{% block body_main %}
+    <section class="ui-container">
+    	<h1>{{string}}</h1>
+    	<p> <span id="mes">3</span>秒钟后自动跳转</p>
+    </section>
+{% endblock %}
+{% block body_footer %}
+    {{ super() }}
+{% endblock %}
+{% block body_src %}
+    {{ super() }}
+{% endblock %}
+{% block body_js %}
+    {{ super() }}
+    <script>
+    	
+    </script>
+{% endblock %}
+{% block body_after_src %}
+    {{ super() }}
+{% endblock %}

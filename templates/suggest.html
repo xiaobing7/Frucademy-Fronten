@@ -1,0 +1,116 @@
+{% extends "base-layout.html" %}
+{% block title %}
+    {{ super() }}
+{% endblock %}
+{% block head_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_css %}
+    {{ super() }}
+    <style type="text/css">
+        .ui-form-item-textarea {
+            height: auto;
+        }
+    </style>
+{% endblock %}
+{% block head_after_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_src %}
+    {{ super() }}
+{% endblock %}
+{% block head_js %}
+    {{ super() }}
+{% endblock %}
+{% block body_header %}
+    {{ super() }}
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="go_back();"></i><h1>建议</h1>
+    </header>
+{% endblock %}
+{% block body_main %}
+    {{ super() }}
+    <section class="ui-container with-bottom-nav">
+        <div class="ui-form ui-border-t">
+            <form action="javascript:;">
+                <div class="ui-form-item ui-border-b">
+                    <label>类型</label>
+                    <div class="ui-select">
+                        <select id="sel-type">
+                            <option value="feedback" selected>反馈建议</option>
+                            <option value="report">bug上报</option>
+                            <option value="cooperative">合作/咨询</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="ui-form-item ui-form-item-textarea ui-border-b">
+                    <label>
+                        内容
+                    </label>
+                    <textarea id="txt-content" rows="11" placeholder="您的宝贵建议 (5～1024字)"></textarea>
+                </div>
+                <div class="ui-form-item ui-border-b">
+                    <div class="ui-notice-btn">
+                        <button class="ui-btn-primary ui-btn-lg">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+{% block body_footer %}
+    {{ super() }}
+{% endblock %}
+{% block body_src %}
+    {{ super() }}
+{% endblock %}
+{% block body_js %}
+    {{ super() }}
+    <script type="text/javascript">
+        $(function() {
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+                var type = $('#sel-type').val(),
+                    content = $('#txt-content').val();
+                var _data = {
+                    type: type,
+                    content: content
+                };
+                var url = "{{ url_for('user.ajax_suggestion', _suffix='') }}";
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: _data,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function(data){
+                        if(data.error == 0) {
+                            $.tips({
+                                content: '谢谢您的宝贵建议！',
+                                stayTime: 1000,
+                                type: "success"
+                             });
+                            setTimeout(function() {
+                                $('form')[0].reset();
+                            }, 500);
+                        }
+                        else {
+                            $.dialog({
+                                title: '提示',
+                                content: data.desc,
+                                button: ["确认"]
+                            });
+                        }
+                    },
+                    error: function(xhr, type){
+                        console.log(xhr, type)
+                        alert('服务器错误')
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
+{% block body_after_src %}
+    {{ super() }}
+{% endblock %}

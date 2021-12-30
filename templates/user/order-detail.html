@@ -1,0 +1,74 @@
+{% extends "user/layout.html" %}
+{% block title %}
+    {{ super() }}
+{% endblock %}
+{% block head_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_css %}
+    {{ super() }}
+{% endblock %}
+{% block head_after_link %}
+    {{ super() }}
+{% endblock %}
+{% block head_src %}
+    {{ super() }}
+{% endblock %}
+{% block head_js %}
+    {{ super() }}
+{% endblock %}
+{% block body_header %}
+    {{ super() }}
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="go_back();"></i><h1>订单详情</h1>
+    </header>
+{% endblock %}
+{% block body_main %}
+    {{ super() }}
+    <div class="ui-container with-top-nav">
+    	<div class="panel panel-default" style="padding:10px">
+	        <ul class="ui-list ui-border-tb">
+	            {% for item in item_list %}
+	            <li>
+	                <div class="ui-avatar">
+	                    <span style="background-image:url({{ url_for('good.good_image', image_path=item.fruit.pic_url_1) }})"></span>
+	                </div>
+	                <div class="ui-list-info ui-border-t">
+	                    <ul class="ui-row">
+	                        <li class="ui-col ui-col-75">
+	                            <h4 class="ui-nowrap">{{ item.fruit.name }}</h4>
+	                            <p class="ui-nowrap">￥{{ item.fruit.price_sell }}</p>
+	                        </li>
+	                        <li class="ui-col ui-col-25">
+	                            <h4 class="ui-nowrap" style="color:grey">X{{ item.amount }}</h4>
+	                        </li>
+	                    </ul>
+	                </div>
+	            </li>
+	            {% endfor %}
+	        </ul>
+    	</div>
+    </div>
+    
+    <ul class="ui-list ui-list-text">
+    	<li class="ui-border-t">
+            <div class="ui-list-info">
+                <h4>总价</h4>
+            </div>
+            <div class="ui-list-action">
+                <h4>￥{{total}}</h4>
+            </div>
+        </li> 
+    </ul>
+{% endblock %}
+{% block body_footer %}
+{% endblock %}
+{% block body_src %}
+    {{ super() }}
+{% endblock %}
+{% block body_js %}
+    {{ super() }}
+{% endblock %}
+{% block body_after_src %}
+    {{ super() }}
+{% endblock %}
