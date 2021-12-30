@@ -1,0 +1,120 @@
+#toolbar {
+    padding-left: 0.8em;
+}
+.box-form-wrapper {
+    position: relative;
+    overflow: auto;
+}
+[name="sel-category"] {
+    height: 1.8em;
+    min-width: 12.45em;
+}
+[name="sel-unit"],
+[name="sel-one-unit"] {
+    height: 1.8em;
+    min-width: 5em;
+}
+.line-tip {
+    width: 4em;
+    text-align: right;
+}
+
+/* Fine Uploader */
+.qq-upload-list {
+    text-align: left;
+}
+
+/* For the bootstrapped demos */
+li.alert-success {
+    background-color: #DFF0D8;
+}
+
+li.alert-error {
+    background-color: #F2DEDE;
+}
+
+.alert-error .qq-upload-failed-text {
+    display: inline;
+}
+#uploader-wrapper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1052;
+    background-color: #fff;
+    visibility: hidden;
+}
+body.uploading {
+    overflow: hidden;
+}
+.images-line img:hover {
+    cursor: pointer;
+}
+#uploader-wrapper .uploader-closer {
+    text-align: right;
+}
+#uploader-wrapper .uploader-closer .btn-close {
+    margin: 5px;
+    display: inline-block;
+    padding: 5px 15px;
+    cursor: pointer;
+    background-color: #fafafa;
+    font-size: 2em;
+}
+#uploader-wrapper .uploader-closer .btn-close:hover {
+    background-color: #cacaca;
+    color: #fff;
+}
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+#uploader-wrapper .uploader-ui .qq-upload-button {
+    display: inline-block;
+    left: 39%;
+    background-color: #009688;
+}
+#uploader-wrapper .uploader-ui .qq-upload-list {
+    display: none;
+}
+
+.images-line .img-wrapper {
+    width: 24%;
+    height: auto;
+    display: inline-block;
+    max-height: 200px;
+    overflow: hidden;
+    text-align: center;
+}
+.images-line .img-wrapper .img-style {
+    margin: 2%;
+    width: 96%;
+    height: auto;
+}
+
+.popup-tip-msg {
+    position: absolute;
+    right: 0.7em;
+    top: 0.5em;
+    color: #f00;
+}
+@media (max-width: 560px) {
+    .popup-tip-msg {
+        max-width: 10em;
+    }
+}
+@media (max-width: 444px) {
+    .box-form-wrapper {
+        padding-top: 2em;
+    }
+    .popup-tip-msg {
+        max-width: 100%;
+    }
+}

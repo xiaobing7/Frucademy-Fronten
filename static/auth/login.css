@@ -1,0 +1,31 @@
+.ui-border-t {border-top: #e0e0e0 solid; border-top-width: 1px;}
+
+.with-bottom-nav {margin-bottom: 60px;}
+
+.ui-footer {background-color: white}
+
+.ui-tiled li i, .ui-tiled li p {cursor: pointer; color: grey;}
+.ui-tiled li p {font-size: 80%;}
+.ui-tiled li i {margin-bottom: -10px;}
+.on p, .on i {color: #00a5e0 !important;}
+
+.fruit-list li {padding:0px 20px 20px;background-color: rgba(255,255,255,0.4); border-radius: 4px;box-shadow: 0px 0px 5px gray;margin-bottom: 3%; width: 42.5vw; height: 47vw; margin-left: 2%; margin-right: 2%;}
+.fruit-list li div {height: 75%; padding-top: 4%}
+.fruit-list li p {font-size: larger; height: 15%;}
+.fruit-list li em {font-size: 110%;}
+.fruit-list li span {text-decoration: line-through; font-size: 70%; color: grey;}
+
+.before-login {margin-left:4%; margin-top: 3%;margin-right:0%;}
+.before-login a {display: inline-block; width: 23%; text-align: center;}
+.before-login a i {color: #00a5e0; font-size: 300%;}
+
+.ui-dialog-cnt div h4 {font-size: larger;}
+
+.ui-icon-close {color:gray;}
+
+.login-logo {height: 35vw; width: 100vw; background-color: white; text-align: center;}
+.login-logo img {height: 100%; width: 35vw;}
+
+.hide {display: none;}
+
+.ui-tab-content {margin-top: 0;}
